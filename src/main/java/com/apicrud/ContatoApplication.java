@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ListaDeContatosApplication {
+public class ContatoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ListaDeContatosApplication.class, args);
+		SpringApplication.run(ContatoApplication.class, args);
 	}
 
 }
