@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 public class ContatoController {
 
-    @GetMapping(path="/{id}/buscarcontato")
-    public ResponseEntity<ContatoDto> obterContatoPorId(@PathVariable(name = "id") String id) {
+    @GetMapping(path="/{usuario}/buscar-lista-de-contatos")
+    public ResponseEntity<ContatoDto> obterListaDeContatosPorUsuario(@PathVariable(name = "usuario") final String usuario) {
 
     }
 }
