@@ -10,9 +10,9 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+//@Builder
 @Entity
-@Table(name = "todo")
+@Table(name = "contato")
 public class ContatoEntity {
     @Id
     @GeneratedValue
