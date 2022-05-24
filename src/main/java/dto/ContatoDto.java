@@ -1,4 +1,4 @@
-package com.apicrud.dto;
+package dto;
 
 public class ContatoDto {
 }

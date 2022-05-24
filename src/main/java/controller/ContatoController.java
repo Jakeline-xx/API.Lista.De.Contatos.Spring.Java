@@ -1,6 +1,6 @@
-package com.apicrud.controller;
+package controller;
 
-import com.apicrud.dto.ContatoDto;
+import dto.ContatoDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
