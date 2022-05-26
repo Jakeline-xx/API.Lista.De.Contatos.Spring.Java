@@ -21,7 +21,7 @@ public class ContatoEntity {
 //    @NotBlank(message="nome nao deve ficar vazio")     ADD: VALIDACAO
     private String nome;
 
-//    @NotBlank(message="nome nao deve ficar vazio")     ADD: VALIDACAO
+//    @NotBlank(message="numero nao deve ficar vazio")     ADD: VALIDACAO
     private String numero;
 
     @ManyToOne(fetch = FetchType.LAZY)  //FetchType.EAGER

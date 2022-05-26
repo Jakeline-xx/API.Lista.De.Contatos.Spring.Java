@@ -21,10 +21,8 @@ public class UsuarioEntity {
     @Id
     private String nomeUsuario;
 
-//    @NotBlank          MEXER NISSO QUANDO FOR FAZER VALIDACAO
+//    @NotBlank(message="nome nao deve ficar vazio")          MEXER NISSO QUANDO FOR FAZER VALIDACAO
 //    @Size(min = 3)
     private String nome;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
-//    private List<TodoEntity> toDoList;
 }
