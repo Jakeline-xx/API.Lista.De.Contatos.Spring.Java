@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ContatoRepository extends JpaRepository<ContatoEntity, Long> {
 
-//    List<ContatoRepository> findAllByUsuarioEntityEquals(UsuarioEntity user);
+    List<ContatoEntity> findAllByUsuarioEntityEquals(UsuarioEntity usuario);
 
 }
