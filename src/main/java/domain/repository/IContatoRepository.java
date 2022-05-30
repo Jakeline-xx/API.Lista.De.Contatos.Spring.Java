@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ContatoRepository extends JpaRepository<ContatoEntity, Long> {
+public interface IContatoRepository extends JpaRepository<ContatoEntity, Long> {
 
     List<ContatoEntity> findAllByUsuarioEntityEquals(UsuarioEntity usuario);
 
