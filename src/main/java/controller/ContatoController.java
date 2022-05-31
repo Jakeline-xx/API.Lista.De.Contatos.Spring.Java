@@ -16,3 +16,37 @@ public class ContatoController {
 
     }
 }
+    @DeleteMapping(path="/users/{username}/todos/{todoId}")
+    public ResponseEntity<Void> deleteTodoFromUser(@PathVariable(name="username") final String username,
+                                                   @PathVariable(name="todoId") final long todoId)
+            throws UserNotFoundException, TodoNotFoundException {
+
+        service.deleteTodoFromUser(username, todoId);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(path="/todos")
+    public ResponseEntity<Void> updateTodo(@RequestBody final TodoDto todoDto) throws UserNotFoundException {
+
+        service.updateTodo(todoDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping(path="/todos")
+    public ResponseEntity<Void> saveTodo(@RequestBody final TodoDto todoDto) throws UserNotFoundException {
+
+        service.saveTodo(todoDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @PostMapping(path="/random")
+    public ResponseEntity<TodoDto> saveRandomTodo(@RequestBody final UserDto userDto) {
+
+        final TodoDto dto = service.generateRandomTodo(userDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
+}
