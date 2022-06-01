@@ -1,5 +1,6 @@
 package service.impl;
 
+import domain.model.ContatoEntity;
 import domain.model.UsuarioEntity;
 import domain.repository.IContatoRepository;
 import dto.ContatoDto;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ContatoService implements IContatoService {
 
-    private final UsuarioService userService;
+    private final UsuarioService usuarioService;
     private final IContatoRepository repository;
     private final RestTemplate restTemplate;
 
@@ -26,7 +27,7 @@ public class ContatoService implements IContatoService {
 
         //checkNotNull(nomeUsuario, "username null");
 
-        final UsuarioEntity usuarioEntity = userService.encontrarUsuarioPeloNomeUsuario(nomeUsuario);
+        final UsuarioEntity usuarioEntity = usuarioService.encontrarUsuarioPeloNomeUsuario(nomeUsuario);
 
         return repository
                 .obterTodosPorUsuarioEntityIgual(usuarioEntity)
@@ -35,107 +36,70 @@ public class ContatoService implements IContatoService {
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    public void deleteTodoFromUser(final String username, final long todoId)
-//            throws UserNotFoundException, TodoNotFoundException {
+    @Override
+    public void deletarContatoDoUsuario(final String nomeUsuario, final long contatoId) // throws UserNotFoundException, TodoNotFoundException
+     {
 //        try {
-//
-//            checkNotNull(username);
-//            checkArgument(todoId > 0);
-//
-//            userService.findUserByUsername(username);
-//
-//            final TodoEntity todoEntity = findTodoById(todoId);
-//
-//            repository.delete(todoEntity);
-//
+
+            //checkNotNull(nomeUsuario);
+            //checkArgument(contatoId > 0);
+
+            usuarioService.encontrarUsuarioPeloNomeUsuario(nomeUsuario);
+
+            final ContatoEntity contatoEntity = obterContatoPorId(contatoId);
+
+            repository.delete(contatoEntity);
+
 //        } catch (UserNotFoundException e) {
-//            log.error("Usuario nao encontrado: " + username);
+//            log.error("Usuario nao encontrado: " + nomeUsuario);
 //            log.error(e.getMessage());
 //            throw e;
 //        } catch (TodoNotFoundException e) {
-//            log.error("TodoEntity nao encontrado: " + todoId);
+//            log.error("TodoEntity nao encontrado: " + contatoId);
 //            log.error(e.getMessage());
 //            throw e;
 //        }
-//    }
+    }
 //
-//    private TodoEntity findTodoById(final long todoId) throws TodoNotFoundException {
-//
-//        checkArgument(todoId > 0);
-//
-//        return repository
-//                .findById(todoId)
-//                .orElseThrow(() -> new TodoNotFoundException("TodoEntity nao encontrado"));
-//    }
-//
-//    @Override
-//    public void updateTodo(final TodoDto todoDto) throws UserNotFoundException {
-//
-//        checkNotNull(todoDto);
-//
-//        final UserEntity userEntity = userService.findUserByUsername(todoDto.getUsername());
-//        final TodoEntity todoEntity = TodoEntity.builder()
-//                .id(todoDto.getId())
-//                .description(todoDto.getDescription())
-//                .userEntity(userEntity)
-//                .build();
-//        repository.save(todoEntity);
-//
-//    }
-//
-//    @Override
-//    public void saveTodo(final TodoDto todoDto) throws UserNotFoundException {
-//
-//        checkNotNull(todoDto);
-//
-//        final UserEntity userEntity = userService.findUserByUsername(todoDto.getUsername());
-//        final TodoEntity todoEntity = TodoEntity.builder()
-//                .description(todoDto.getDescription())
-//                .userEntity(userEntity)
-//                .build();
-//        repository.save(todoEntity);
-//    }
-//
-//    @Override
-//    public TodoDto generateRandomTodo(final UserDto userDto) {
-//
-//        checkNotNull(userDto);
-//
-//        final ResponseBoredDto responseBoredApi = getActivityFromBoredAPI();
-//
-//        UserEntity userEntity = userService.findUserByUsername(userDto.getUsername());
-//
-//        final TodoEntity entity = transformToTodoEntity(responseBoredApi, userEntity);
-//
-//        repository.save(entity);
-//
-//        final TodoDto dto = transformToDto(entity);
-//
-//        return  dto;
-//    }
-//
-//    private TodoDto transformToDto(final TodoEntity entity) {
-//        return
-//                TodoDto.builder()
-//                        .id(entity.getId())
-//                        .description(entity.getDescription())
-//                        .username(entity.getUserEntity().getUsername())
-//                        .build();
-//    }
-//
-//    private TodoEntity transformToTodoEntity(final ResponseBoredDto responseBoredApi, final UserEntity userEntity) {
-//        return
-//                TodoEntity.builder()
-//                        .description(responseBoredApi.getDescription())
-//                        .userEntity(userEntity)
-//                        .build();
-//    }
-//
-//    private ResponseBoredDto getActivityFromBoredAPI() {
-//        return restTemplate
-//                .getForEntity("https://www.boredapi.com/api/activity", ResponseBoredDto.class)
-//                .getBody();
-//    }
+    private ContatoEntity obterContatoPorId(final long contatoId) //throws TodoNotFoundException
+     {
 
+        //checkArgument(contatoId > 0);
+
+        return repository
+                .findById(contatoId)
+                .orElseThrow(() -> new TodoNotFoundException("ContatoEntity nao encontrado"));
+    }
+
+    @Override
+    public void atualizarContato(final ContatoDto contatoDto) //throws UserNotFoundException
+    {
+
+        //checkNotNull(contatoDto);
+
+        final UsuarioEntity usuarioEntity = usuarioService.encontrarUsuarioPeloNomeUsuario(contatoDto.getNomeUsuario());
+        final ContatoEntity contatoEntity = ContatoEntity.builder()
+                .id(contatoDto.getId())
+                .usuarioEntity(usuarioEntity)
+                .nome(contatoDto.getNome())
+                .numero(contatoDto.getNumero())
+                .build();
+        repository.save(contatoEntity);
+
+    }
+
+    @Override
+    public void salvarContato(final ContatoDto contatoDto) //throws UserNotFoundException
+    {
+
+        //checkNotNull(contatoDto);
+
+        final UsuarioEntity usuarioEntity = usuarioService.encontrarUsuarioPeloNomeUsuario(contatoDto.getNomeUsuario());
+        final ContatoEntity todoEntity = ContatoEntity.builder()
+                .nome(contatoDto.getNome())
+                .numero(contatoDto.getNumero())
+                .usuarioEntity(usuarioEntity)
+                .build();
+        repository.save(todoEntity);
+    }
 }
