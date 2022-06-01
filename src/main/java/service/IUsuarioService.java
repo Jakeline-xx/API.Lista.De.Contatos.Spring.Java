@@ -6,7 +6,7 @@ import dto.UsuarioDto;
 import java.util.List;
 
 public interface IUsuarioService {
-    UsuarioEntity encontrarUsuarioPeloNomeUsuario(String nomeUsuario); //throws UserNotFoundException; //ADD: IMPLEMENTACAO DA EXCEPTION
+    //UsuarioEntity encontrarUsuarioPeloNomeUsuario(String nomeUsuario); //throws UserNotFoundException; //ADD: IMPLEMENTACAO DA EXCEPTION
 
     void salvarUsuario(UsuarioDto usuarioDto);
 
