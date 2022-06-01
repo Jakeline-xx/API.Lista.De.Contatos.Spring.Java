@@ -3,6 +3,7 @@ package service.impl;
 import domain.model.UsuarioEntity;
 import domain.repository.IUsuarioRepository;
 import dto.UsuarioDto;
+import exception.UsuarioNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import service.IUsuarioService;
@@ -30,9 +31,9 @@ public class UsuarioService implements IUsuarioService {
                         .collect(Collectors.toList());
     }
 
-    public UsuarioEntity encontrarUsuarioPeloNomeUsuario(String usuario) throws UserNotFoundException{
+    public UsuarioEntity encontrarUsuarioPeloNomeUsuario(String usuario) throws UsuarioNotFoundException {
         return repository
                 .findById(usuario)
-                .orElseThrow(() -> new UserNotFoundException("Usuario nao encontrado."));
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario nao encontrado."));
     }
 }

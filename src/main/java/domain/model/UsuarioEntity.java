@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-//import javax.validation.constraints.NotBlank;   MEXER NISSO QUANDO FOR FAZER VALIDACAO
-//import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -21,8 +21,7 @@ public class UsuarioEntity {
     @Id
     private String nomeUsuario;
 
-//    @NotBlank(message="nome nao deve ficar vazio")          MEXER NISSO QUANDO FOR FAZER VALIDACAO
-//    @Size(min = 3)
+    @Size(min = 3)
     private String nome;
 
 }

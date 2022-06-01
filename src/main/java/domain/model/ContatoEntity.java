@@ -18,10 +18,8 @@ public class ContatoEntity {
     @GeneratedValue
     private Long id;
 
-//    @NotBlank(message="nome nao deve ficar vazio")     ADD: VALIDACAO
     private String nome;
 
-//    @NotBlank(message="numero nao deve ficar vazio")     ADD: VALIDACAO
     private String numero;
 
     @ManyToOne(fetch = FetchType.LAZY)  //FetchType.EAGER

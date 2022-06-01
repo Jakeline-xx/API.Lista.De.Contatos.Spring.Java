@@ -5,12 +5,11 @@ import domain.model.UsuarioEntity;
 import domain.repository.IContatoRepository;
 import dto.ContatoDto;
 import exception.ContatoNotFoundException;
+import exception.UsuarioNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import service.IContatoService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,12 +20,11 @@ public class ContatoService implements IContatoService {
 
     private final UsuarioService usuarioService;
     private final IContatoRepository repository;
-    private final RestTemplate restTemplate;
 
     @Override
     public List<ContatoDto> obterListaDeContatosDoUsuario(final String nomeUsuario)  {
 
-        //checkNotNull(nomeUsuario, "username null");
+        //checkNotNull(nomeUsuario, "nome de usuario null");
 
         final UsuarioEntity usuarioEntity = usuarioService.encontrarUsuarioPeloNomeUsuario(nomeUsuario);
 
@@ -38,9 +36,8 @@ public class ContatoService implements IContatoService {
     }
 
     @Override
-    public void deletarContatoDoUsuario(final String nomeUsuario, final long contatoId) // throws UserNotFoundException, TodoNotFoundException
-     {
-//        try {
+    public void deletarContatoDoUsuario(final String nomeUsuario, final long contatoId) throws UsuarioNotFoundException, ContatoNotFoundException {
+        try {
 
             //checkNotNull(nomeUsuario);
             //checkArgument(contatoId > 0);
@@ -51,19 +48,18 @@ public class ContatoService implements IContatoService {
 
             repository.delete(contatoEntity);
 
-//        } catch (UserNotFoundException e) {
-//            log.error("Usuario nao encontrado: " + nomeUsuario);
-//            log.error(e.getMessage());
-//            throw e;
-//        } catch (TodoNotFoundException e) {
-//            log.error("TodoEntity nao encontrado: " + contatoId);
-//            log.error(e.getMessage());
-//            throw e;
-//        }
+        } catch (UsuarioNotFoundException e) {
+            log.error("Usuario nao encontrado: " + nomeUsuario);
+            log.error(e.getMessage());
+            throw e;
+        } catch (ContatoNotFoundException e) {
+            log.error("ContatoEntity nao encontrado: " + contatoId);
+            log.error(e.getMessage());
+            throw e;
+        }
     }
-//
-    private ContatoEntity obterContatoPorId(final long contatoId) //throws TodoNotFoundException
-     {
+
+    private ContatoEntity obterContatoPorId(final long contatoId) throws ContatoNotFoundException{
 
         //checkArgument(contatoId > 0);
 
@@ -73,8 +69,7 @@ public class ContatoService implements IContatoService {
     }
 
     @Override
-    public void atualizarContato(final ContatoDto contatoDto) //throws UserNotFoundException
-    {
+    public void atualizarContato(final ContatoDto contatoDto) throws UsuarioNotFoundException{
 
         //checkNotNull(contatoDto);
 
@@ -90,8 +85,7 @@ public class ContatoService implements IContatoService {
     }
 
     @Override
-    public void salvarContato(final ContatoDto contatoDto) //throws UserNotFoundException
-    {
+    public void salvarContato(final ContatoDto contatoDto) throws UsuarioNotFoundException{
 
         //checkNotNull(contatoDto);
 
