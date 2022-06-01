@@ -14,5 +14,4 @@ public interface IContatoService {
 
     void salvarContato(ContatoDto contatoDto); //throws UserNotFoundException;
 
-    ContatoDto gerarContatoAleatorio(UsuarioDto usuarioDto);
 }

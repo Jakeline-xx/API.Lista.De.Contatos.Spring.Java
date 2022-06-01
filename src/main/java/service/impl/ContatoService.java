@@ -68,7 +68,7 @@ public class ContatoService implements IContatoService {
 
         return repository
                 .findById(contatoId)
-                .orElseThrow(() -> new TodoNotFoundException("ContatoEntity nao encontrado"));
+                .orElseThrow(() -> new ContatoNotFoundException("ContatoEntity nao encontrado"));
     }
 
     @Override

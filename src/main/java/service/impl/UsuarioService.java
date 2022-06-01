@@ -30,9 +30,9 @@ public class UsuarioService implements IUsuarioService {
                         .collect(Collectors.toList());
     }
 
-//    public UsuarioEntity encontrarUsuarioPeloNomeUsuario(String usuario) throws UserNotFoundException{
-//        return repository
-//                .findById(usuario)
-//                .orElseThrow(() -> new UserNotFoundException("Usuario nao encontrado."));
-//    }
+    public UsuarioEntity encontrarUsuarioPeloNomeUsuario(String usuario) throws UserNotFoundException{
+        return repository
+                .findById(usuario)
+                .orElseThrow(() -> new UserNotFoundException("Usuario nao encontrado."));
+    }
 }
