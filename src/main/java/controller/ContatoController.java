@@ -15,6 +15,7 @@ public class ContatoController {
 //    public ResponseEntity<ContatoDto> obterListaDeContatosPorUsuario(@PathVariable(name = "usuario") final String usuario) {
 //
 //    }
+
 //    @DeleteMapping(path="/users/{username}/todos/{todoId}")
 //    public ResponseEntity<Void> deleteTodoFromUser(@PathVariable(name="username") final String username,
 //                                                   @PathVariable(name="todoId") final long todoId)
@@ -38,14 +39,4 @@ public class ContatoController {
 //        service.saveTodo(todoDto);
 //        return new ResponseEntity<>(HttpStatus.CREATED);
 //    }
-//
-//
-//    @PostMapping(path="/random")
-//    public ResponseEntity<TodoDto> saveRandomTodo(@RequestBody final UserDto userDto) {
-//
-//        final TodoDto dto = service.generateRandomTodo(userDto);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
-//    }
-
 }
