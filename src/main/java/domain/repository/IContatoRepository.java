@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface IContatoRepository extends JpaRepository<ContatoEntity, Long> {
 
-    List<ContatoEntity> findAllByUsuarioEntityEquals(UsuarioEntity usuario);
+    List<ContatoEntity> obterTodosPorUsuarioEntityIgual(UsuarioEntity usuario);
 
 }
